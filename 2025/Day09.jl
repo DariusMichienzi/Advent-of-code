@@ -1,4 +1,3 @@
-@time begin
 f = "./DataFiles/Day09.txt"
 lines = split.(readlines(f),",")
 coords = [parse.(Int,line) for line in lines]
@@ -71,4 +70,5 @@ ans2 = maximum(areas)
 println()
 println("Part 1 answer = $ans1")
 println("Part 2 answer = $ans2")
-end
+
+# 117s to solve
