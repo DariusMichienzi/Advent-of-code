@@ -1,4 +1,3 @@
-@time begin
 using Combinatorics
 f = "./DataFiles/Day10.txt"
 lines = readlines(f)
@@ -66,4 +65,3 @@ for i in eachindex(batteries)
     ans2 += sum(Int.(round.((value.(x)))))
 end
 println("Part 2 answer = $ans2")
-end
