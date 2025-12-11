@@ -45,3 +45,4 @@ for i in eachindex(eggcoord[1,:])
     mat[eggcoord[1,i]+1,eggcoord[2,i]+1] += 1
 end
 plot(heatmap(rotl90(mat)))
+plot(dist)

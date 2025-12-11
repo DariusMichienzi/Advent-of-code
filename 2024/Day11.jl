@@ -25,6 +25,7 @@ ans1 = sum(stone_count.(data,25))
 println("part 1 answer = ",ans1)
 
 #end of part 1
-
+@time begin
 ans2 = sum(stone_count.(data,75))
+end
 println("part 2 answer = ",ans2)
