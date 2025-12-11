@@ -25,7 +25,6 @@ end
 
 ans1 = prod(sort(length.(filter(x->length(x) > 1,connected_components(graph))),rev=true)[1:3])
 println("Part 1 answer = $ans1")
-gplot(graph)
 
 #end of part 1
 
@@ -37,7 +36,6 @@ end
 
 ans2 = coords[connects[1]][1] * coords[connects[2]][1]
 println("Part 2 answer = $ans2")
-gplot(graph)
 
 #part 1 ~20s
 #part 2 ~110s
