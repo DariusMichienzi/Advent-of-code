@@ -6,14 +6,13 @@ buttons = []
 batteries = []
 
 for line in lines
-#line = lines[1]
-splitline = split(line," ")
-light = [c == '#' ? 1 : 0 for c in splitline[1] if c in ('.', '#')]
-button = [(parse.(Int, split(strip(s, ['(', ')']), ",")) .+ 1) for s in splitline[2:end-1]]
-battery = parse.(Int, split(strip(splitline[end] , ['{', '}']), ","))
-push!(lights,light)
-push!(buttons,button)
-push!(batteries,battery)
+    splitline = split(line," ")
+    light = [c == '#' ? 1 : 0 for c in splitline[1] if c in ('.', '#')]
+    button = [(parse.(Int, split(strip(s, ['(', ')']), ",")) .+ 1) for s in splitline[2:end-1]]
+    battery = parse.(Int, split(strip(splitline[end] , ['{', '}']), ","))
+    push!(lights,light)
+    push!(buttons,button)
+    push!(batteries,battery)
 end
 ans1 = 0 
 for i in eachindex(lights)
@@ -29,7 +28,7 @@ for i in eachindex(lights)
             end
             if !(1 in light)
                 solved = true
-                ans1 += j
+                global ans1 += j
                 break
             else
                 light =  copy(lights[i])
@@ -62,6 +61,6 @@ for i in eachindex(batteries)
     
     optimize!(model)
     
-    ans2 += sum(Int.(round.((value.(x)))))
+    global ans2 += sum(Int.(round.((value.(x)))))
 end
 println("Part 2 answer = $ans2")

@@ -17,7 +17,7 @@ elseif get(data,path + CartesianIndex(1,0),"!") == "^"
     push!(beam,path + CartesianIndex(1,-1))
     paths[path + CartesianIndex(1,1)] += paths[path]
     paths[path + CartesianIndex(1,-1)] += paths[path]
-    ans1 +=1
+    global ans1 +=1
 end
 unique!(beam)
 end

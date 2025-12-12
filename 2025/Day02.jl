@@ -8,7 +8,7 @@ L = parse.(Int,line)
     for k in R
         N = ndigits(k)
         if N % 2 == 0 && k ÷ 10 ^ (ndigits(k)-N÷2) == k % 10 ^ (ndigits(k)-N÷2)
-            ans1 += k
+            global ans1 += k
         end
     end
 end
@@ -29,7 +29,7 @@ for line in lines
         for i in 1:(ndigits(k)÷2)
             T = k ÷ 10 ^ (ndigits(k)-i)
             if concat(T,N ÷ i) == k
-                ans2 += k
+                global ans2 += k
                 break
             end
         end

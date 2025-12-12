@@ -9,7 +9,7 @@ for i in 1:(length(line)-1)
     push!(combinations,10*line[i]+maximum(line[i+1:end]))
 end
 
-ans1 += maximum(combinations)
+global ans1 += maximum(combinations)
 end
 
 println("Part 1 answer = $ans1")
@@ -26,7 +26,7 @@ for line in lines
         index += argmax(line[index+1: end-i])
         total = parse(Int,string(total,line[index]))
     end
-    ans2 += total
+    global ans2 += total
 end
 
 println("Part 2 answer = $ans2")

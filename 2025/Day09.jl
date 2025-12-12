@@ -7,7 +7,7 @@ for i in eachindex(coords)
         if !(i==j)
             area = (abs(coords[i][1] - coords[j][1]) + 1)*(abs(coords[i][2] - coords[j][2]) + 1)  
             if area > ans1
-                ans1 = area
+                global ans1 = area
             end
         end
     end
@@ -28,18 +28,18 @@ for i in 1:(length(corns)-1)
 edgepos = vec(collect(corns[i]:CartesianIndex(1,1):corns[i+1]))[2:end]
 edgeneg = vec(collect(corns[i]:CartesianIndex(-1,-1):corns[i+1]))[2:end]
 if isempty(edgepos)
-    edge = [edge;edgeneg]
+    global edge = [edge;edgeneg]
 else
-    edge = [edge;edgepos]
+    global edge = [edge;edgepos]
 end
 end
 
 edgeposend = vec(collect(corns[end]:CartesianIndex(1,1):corns[1]))[2:end-1]
 edgenegend = vec(collect(corns[end]:CartesianIndex(-1,-1):corns[1]))[2:end-1]
 if isempty(edgeposend)
-    edge = [edge;edgenegend]
+    global edge = [edge;edgenegend]
 else
-    edge = [edge;edgeposend]
+    global edge = [edge;edgeposend]
 end
 
 ans2 = 0 
@@ -58,7 +58,7 @@ K = collect(combinations(corns, 2))
                 end
             end
             if available == true
-                ans2 = area
+                global ans2 = area
             end
         end
 end

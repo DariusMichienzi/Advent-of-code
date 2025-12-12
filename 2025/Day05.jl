@@ -9,7 +9,7 @@ ans1 = 0
 for F in Food
     for R in eachrow(goodId)
         if F >= R[1] && F<=R[2]
-        ans1+=1
+        global ans1+=1
         break
         end
     end
@@ -24,11 +24,11 @@ ans2 = 0
 i = 1
 while i <= length(allId[:,1])
     (bottom,top) = allId[i,:]
-    i += 1
+    global i += 1
     while i <= length(allId[:,1]) && allId[i,1] <= top
         top = max(top, allId[i,2])
-        i += 1
+        global i += 1
     end
-    ans2 += length(range(bottom,top))
+    global ans2 += length(range(bottom,top))
 end
 println("Part 2 answer = $ans2")

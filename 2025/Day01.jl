@@ -15,14 +15,14 @@ ans2 = 0
 for i in eachindex(numbers)
     if direction[i] == 'L'
         visit = mod.(collect(pos:-1:pos - numbers[i]),100)
-        pos = mod(pos - numbers[i],100)
+        global pos = mod(pos - numbers[i],100)
     elseif direction[i] == 'R'
         visit = mod.(collect(pos:1:pos + numbers[i]),100)
-        pos = mod(pos + numbers[i],100)
+        global pos = mod(pos + numbers[i],100)
     end
     
-    ans1 += visit[1] == 0 ? 1 : 0 
-    ans2 += length(findall(x->x==0,visit))
+    global ans1 += visit[1] == 0 ? 1 : 0 
+    global ans2 += length(findall(x->x==0,visit))
 end
 
 ans2 -= ans1

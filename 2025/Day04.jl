@@ -18,19 +18,19 @@ for roll in rolls
         end
     end
     if S < 4
-        ans1+=1
+        global ans1+=1
     end
 end
 println("Part 1 answer = $ans1")
 # end of part 1 
-shelf = deepcopy(data)
+global shelf = deepcopy(data)
 
 ans2 = 0 
 changed = true 
 
 while changed
-    rolls = findall(x->x=="@",shelf)
-    changed = false
+    global rolls = findall(x->x=="@",shelf)
+    global changed = false
     for roll in rolls
         S = 0 
         for C in surround
@@ -39,7 +39,7 @@ while changed
             end
         end
         if S < 4
-            ans2+=1
+            global ans2 += 1
             shelf[roll] = "."
             changed = true
         end
