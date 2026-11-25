@@ -1,0 +1,8 @@
+/* Source Code Pro, the font used throughout the Advent of Code site and last year's PowerPoint
+   (SIL Open Font License, see fonts/OFL.txt; files from the @fontsource/source-code-pro package).
+   Kept separate from custom.scss so the relative font paths resolve from the project folder. */
+@font-face{font-family:"Source Code Pro";src:url(fonts/source-code-pro-latin-400-normal.woff2) format("woff2");font-weight:400}
+@font-face{font-family:"Source Code Pro";src:url(fonts/source-code-pro-latin-400-italic.woff2) format("woff2");font-weight:400;font-style:italic}
+@font-face{font-family:"Source Code Pro";src:url(fonts/source-code-pro-latin-500-normal.woff2) format("woff2");font-weight:500}
+@font-face{font-family:"Source Code Pro";src:url(fonts/source-code-pro-latin-600-normal.woff2) format("woff2");font-weight:600}
+@font-face{font-family:"Source Code Pro";src:url(fonts/source-code-pro-latin-700-normal.woff2) format("woff2");font-weight:700}

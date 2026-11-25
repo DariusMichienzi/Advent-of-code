@@ -1,0 +1,391 @@
+/*-- scss:defaults --*/
+// Advent of Code variant of Darius Michienzi's deck style.
+// Same layout and components as the usual template (eyebrows, boxes, grids, stat cards, flow, title stack),
+// restyled to match the Advent of Code site and last year's AoC PowerPoint:
+// dark navy page, Source Code Pro everywhere, green titles, gold highlights and stars.
+$ink:        #EDEDF2;   // body text (white-ish, as in the PowerPoint)
+$bright:     #FFFFFF;   // emphasis
+$muted:      #9A9AB0;
+$rule:       #33335A;
+$paper-bg:   #0F0F23;   // AoC page colour
+$panel:      #15152E;
+$code-bg:    #10101A;   // AoC code-block colour
+$green:      #00CC00;   // AoC title green
+$green-dim:  #009900;   // AoC link green
+$green-soft: rgba(0, 204, 0, .08);
+$gold:       #FFFF66;   // AoC star / highlight gold
+$gold-soft:  rgba(255, 255, 102, .08);
+$red:        #FF5F5F;   // used sparingly, for warnings
+$mono:       "Source Code Pro", "DejaVu Sans Mono", Menlo, monospace;
+
+// keep the template's names so components copy across unchanged
+$teal: $green;
+$orange: $gold;
+
+$body-bg: $paper-bg;
+$body-color: $ink;
+$link-color: $green-dim;
+$font-family-sans-serif: $mono;
+$font-family-monospace: $mono;
+$presentation-font-size-root: 21px;
+$presentation-line-height: 1.42;
+$presentation-heading-font: $mono;
+$presentation-heading-color: $green;
+$presentation-heading-font-weight: 400;
+$presentation-h2-font-size: 1.7em;
+$presentation-h3-font-size: 1.05em;
+$presentation-block-margin: 14px;
+
+// Code blocks
+$code-block-bg: $code-bg;
+$code-block-border-color: $rule;
+$code-block-font-size: 15px;
+
+/*-- scss:rules --*/
+
+// ---------- slide frame ----------
+.reveal .slides {
+  text-align: left;
+}
+.reveal .slides section.slide.level2 {
+  box-sizing: border-box;
+  height: 720px !important;
+  padding: 40px 64px 54px !important;
+}
+.reveal p { margin: 0 0 10px; }
+.reveal strong, .reveal b { font-weight: 600; color: $bright; text-shadow: 0 0 5px rgba(255, 255, 255, .55); }
+.reveal a { color: $green-dim; text-decoration: none; }
+.reveal a:hover { color: #99FF99; }
+
+// Eyebrow above each title, set with {eyebrow="..."} on the slide heading.
+// Drawn AoC style: --- Day 1 ---
+.reveal .slides section[data-eyebrow]::before {
+  content: "--- " attr(data-eyebrow) " ---";
+  display: block;
+  font-family: $mono;
+  font-size: 16px;
+  font-weight: 400;
+  color: $muted;
+  margin-bottom: 6px;
+}
+.reveal h2 {
+  font-family: $mono;
+  font-weight: 400;
+  color: $green;
+  font-size: 38px;
+  line-height: 1.15;
+  letter-spacing: 0;
+  margin: 0 0 26px;
+  text-wrap: balance;
+  text-shadow: 0 0 2px $green, 0 0 6px rgba(0, 204, 0, .55);
+}
+.reveal h3 {
+  font-family: $mono;
+  font-weight: 600;
+  color: $ink;
+  font-size: 21px;
+  line-height: 1.2;
+  margin: 0 0 6px;
+}
+
+// footer and slide number
+.reveal .footer {
+  left: 64px !important; right: auto !important; width: auto !important; bottom: 18px;
+  text-align: left !important;
+  font-size: 12px !important;
+  color: $muted;
+}
+.reveal .slide-number {
+  right: 64px !important; bottom: 14px !important;
+  font-family: $mono;
+  font-size: 12px !important;
+  color: $muted !important;
+  background: transparent !important;
+}
+
+// ---------- lists: gold stars for bullets ----------
+.reveal ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.reveal ul li {
+  position: relative;
+  padding-left: 30px;
+  margin: 0;
+}
+.reveal ul li::before {
+  content: "*";
+  position: absolute;
+  left: 4px; top: -.02em;
+  font-weight: 700;
+  color: $gold;
+  text-shadow: 0 0 5px $gold;
+}
+.reveal ul li p { margin: 0; }
+
+// ---------- text sizes ----------
+.reveal .med   { font-size: 18.5px; }
+.reveal .small { font-size: 17px; }
+.reveal .xs    { font-size: 14px; color: $muted; }
+.reveal .hl    { color: $gold; }                       // keyword highlight, as in the PowerPoint
+.reveal .warn  { color: $red; font-weight: 600; }
+.reveal .gold  { color: $gold; text-shadow: 0 0 5px rgba(255, 255, 102, .6); }
+.reveal code   { font-family: $mono; font-size: .92em; color: $bright; background: none; padding: 0; }
+.reveal .lab {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: $green;
+  margin-bottom: 6px;
+}
+
+// ---------- boxes ----------
+.reveal .box, .reveal .card, .reveal .stat {
+  background: $panel;
+  border: 1px solid $rule;
+  border-radius: 3px;
+  padding: 14px 18px;
+}
+.reveal .card p:last-child, .reveal .box p:last-child,
+.reveal .paper p:last-child, .reveal .take p:last-child { margin-bottom: 0; }
+.reveal .paper {
+  border-left: 3px solid $green;
+  background: $green-soft;
+  padding: 12px 16px;
+  font-size: 17px;
+}
+.reveal .med .paper, .reveal .med .take { font-size: 19px; padding: 16px 20px; }
+.reveal .stat { padding: 18px 20px; }
+.reveal .take {
+  border-left: 3px solid $gold;
+  background: $gold-soft;
+  padding: 12px 16px;
+  font-size: 17.5px;
+}
+.reveal .take .lab { color: $gold; }
+.reveal .stat .k { font-size: 12.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: $muted; }
+.reveal .stat .v { font-family: $mono; font-weight: 400; font-size: 44px; margin: 4px 0; color: $gold; text-shadow: 0 0 6px rgba(255, 255, 102, .5); }
+.reveal .stat .d { font-size: 15.5px; color: $muted; line-height: 1.35; }
+
+// ---------- grids (use ::: {.grid2}, {.grid3}, {.grid4}) ----------
+.reveal .grid2, .reveal .grid3, .reveal .grid4 {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.reveal .grid2 { grid-template-columns: repeat(2, 1fr); }
+.reveal .grid3 { grid-template-columns: repeat(3, 1fr); }
+.reveal .grid4 { grid-template-columns: repeat(4, 1fr); }
+.reveal .columns { gap: 28px; display: flex; }
+.reveal .columns .column { min-width: 0; }
+.reveal .stack > * + * { margin-top: 14px; }
+
+// ---------- figures ----------
+.reveal .quarto-figure {
+  background: $panel;
+  border: 1px solid $rule;
+  border-radius: 3px;
+  padding: 10px;
+  margin: 0 0 14px;
+}
+.reveal .quarto-figure figure { margin: 0; }
+.reveal .quarto-figure p { margin: 0; text-align: center; }
+.reveal .quarto-figure img { margin: 0; display: inline-block; }
+.reveal .quarto-figure figcaption,
+.reveal .quarto-figure .figure-caption {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.35;
+  color: $muted;
+  text-align: left;
+}
+.reveal .quarto-figure figcaption strong { color: $ink; text-shadow: none; }
+.reveal .plainimg img { margin: 0; }
+
+// Row of photos cropped to the same height: ::: {.photos .grid4} with one plain image per cell.
+// Any photo aspect ratio works; object-fit crops it to fill the cell.
+.reveal .photos { margin: 0; }
+.reveal .photos p { margin: 0; }
+.reveal .photos img {
+  display: block; width: 100%; height: 200px; max-width: none; max-height: none;
+  object-fit: cover; margin: 0;
+  border: 1px solid $rule; border-radius: 3px;
+}
+// A single image filling a fixed-height panel: ::: {.fill style="height:...px"}
+.reveal .fill { background: $panel; border: 1px solid $rule; border-radius: 3px; padding: 10px; }
+.reveal .fill p { margin: 0; height: 100%; }
+.reveal .fill img { display: block; width: 100%; height: 100%; max-width: none; max-height: none; object-fit: contain; margin: 0; }
+
+// ---------- tables ----------
+.reveal table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 17px;
+  margin: 0 0 12px;
+}
+.reveal table th {
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: $muted;
+  padding: 7px 10px;
+  border-bottom: 1.5px solid $green !important;
+}
+.reveal table td {
+  padding: 7px 10px;
+  border-bottom: 1px solid $rule;
+  vertical-align: top;
+  font-variant-numeric: tabular-nums;
+}
+.reveal table tr:last-child td { border-bottom: none; }
+.reveal table caption { display: none; }
+
+// ---------- code blocks ----------
+.reveal div.sourceCode {
+  background: $code-bg;
+  border: 1px solid $rule;
+  border-radius: 3px;
+  margin: 0 0 14px;
+}
+.reveal div.sourceCode pre {
+  margin: 0;
+  box-shadow: none;
+  width: 100%;
+}
+.reveal pre code {
+  font-size: 15px;
+  line-height: 1.5;
+  padding: 12px 16px;
+  max-height: none;
+  background: transparent;
+  color: #CCCCCC;
+  text-shadow: none;
+}
+.reveal .codesm pre code { font-size: 13px; line-height: 1.42; padding: 10px 14px; }
+.reveal .codexs pre code { font-size: 11.5px; line-height: 1.34; padding: 8px 14px; }
+// File name above a code block, set with filename="..." on the block
+.reveal .code-with-filename { margin: 0 0 14px; }
+.reveal .code-with-filename div.sourceCode { margin: 0; border-top-left-radius: 0; border-top-right-radius: 0; }
+.reveal .code-with-filename .code-with-filename-file {
+  background: $panel;
+  border: 1px solid $rule;
+  border-bottom: 0;
+  border-radius: 3px 3px 0 0;
+  padding: 5px 14px;
+  margin: 0;
+}
+.reveal .code-with-filename .code-with-filename-file pre { margin: 0; box-shadow: none; padding: 0; background: none; }
+.reveal .code-with-filename .code-with-filename-file strong {
+  font-family: $mono;
+  font-weight: 400;
+  font-size: 12.5px;
+  color: $green;
+  letter-spacing: .02em;
+  text-shadow: none;
+}
+
+// Live-demo slides: {.demo} on the heading turns the eyebrow gold
+.reveal .slides section.demo[data-eyebrow]::before { color: $gold; }
+
+// Five equal cells (e.g. a row of thumbnails)
+.reveal .grid5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 16px; }
+.reveal .grid5 .quarto-figure { padding: 6px; margin: 0; }
+// Tall thumbnails cropped from the top (puzzle screenshots): ::: {.grid5 .thumbs}
+.reveal .thumbs img { width: 100%; height: 380px; max-width: none; max-height: none; object-fit: cover; object-position: top; }
+.reveal .grid5 figcaption { font-family: $mono; font-size: 15px !important; text-align: center !important; margin-top: 6px !important; }
+
+// Left-to-right process with arrows: ::: {.flow} with one ::: {} per step
+.reveal .flow { display: flex; gap: 30px; margin-bottom: 18px; }
+.reveal .flow > div {
+  flex: 1; position: relative;
+  background: $panel; border: 1px solid $rule; border-radius: 3px; padding: 12px 16px;
+}
+.reveal .flow > div p:last-child { margin-bottom: 0; }
+.reveal .flow > div:not(:last-child)::after {
+  content: "→"; position: absolute; right: -24px; top: 50%; transform: translateY(-50%);
+  color: $green; font-size: 20px; font-weight: 600;
+}
+
+// Keyboard keys: [Ctrl]{.kbd}
+.reveal .kbd {
+  font-family: $mono; font-size: .85em;
+  border: 1px solid $rule; border-bottom-width: 2px; border-radius: 3px;
+  padding: 0 5px; background: $panel; white-space: nowrap;
+}
+
+// display equations
+.reveal .eq { text-align: center; font-size: 21px; margin: 6px 0; }
+
+// One centred line at the bottom of a slide (e.g. "Give it a go and have fun!")
+.reveal .closer { text-align: center; margin-top: 18px; font-size: 24px; }
+
+// ---------- title slide (centred, like the PowerPoint) ----------
+.reveal .slides section.title-dark { color: $ink; }
+.reveal .title-dark .tw {
+  margin: 150px auto 0;
+  max-width: 1100px;
+  text-align: center;
+}
+.reveal .title-dark .kicker {
+  font-size: 15px; color: $muted; margin-bottom: 26px;
+}
+.reveal .title-dark .titletext {
+  font-family: $mono;
+  font-weight: 400; font-size: 64px; line-height: 1.1;
+  color: $green; margin: 0 0 22px; text-wrap: balance;
+  text-shadow: 0 0 2px $green, 0 0 8px rgba(0, 204, 0, .6);
+}
+.reveal .title-dark .authors { font-size: 22px; line-height: 1.5; margin-bottom: 14px; color: $gold; text-shadow: 0 0 5px rgba(255, 255, 102, .45); }
+.reveal .title-dark .meta { font-size: 18px; color: $ink; }
+.reveal .title-dark .meta strong { color: $ink; text-shadow: none; font-weight: 400; }
+.reveal .title-dark img.specline {
+  position: absolute; left: 0; top: 540px; width: 1280px; height: 120px;
+  max-width: none; max-height: none; margin: 0;
+}
+.reveal .stat .k, .reveal .stat .v, .reveal .stat .d { display: block; }
+.reveal .stat p { margin: 0; }
+
+// Title slide variant: title replaced in place by agenda words on each key press (see slides.qmd)
+.reveal .title-dark .titlestack { display: grid; justify-items: center; }
+.reveal .title-dark .titlestack > .titletext { grid-area: 1 / 1; }
+.reveal .title-dark .titletext.remind { color: $gold; text-shadow: 0 0 2px $gold, 0 0 8px rgba(255, 255, 102, .6); }
+
+// ---------- big centred one-word slides (AOB, PUB?), like the PowerPoint section slides ----------
+.reveal .slides section.bigcentre h2 {
+  position: absolute; left: 0; right: 0; top: 300px;
+  text-align: center; font-size: 64px; margin: 0;
+  text-shadow: 0 0 2px $green, 0 0 8px rgba(0, 204, 0, .6);
+}
+.reveal .slides section.bigcentre .subline {
+  position: absolute; left: 0; right: 0; top: 400px;
+  text-align: center; font-size: 22px; color: $muted;
+}
+
+// Hide the slide number on slides marked {visibility="uncounted"} (appendix/backup slides)
+html:not(.print-pdf) .reveal:has(.slides section.present[data-visibility="uncounted"]) .slide-number,
+.reveal .pdf-page:has(section[data-visibility="uncounted"]) .slide-number { display: none !important; }
+
+// Photos that appear one after another on a single key press: add .fragment .custom to the .photos div
+.reveal .slides section .photos.fragment { opacity: 1; visibility: inherit; transform: none; }
+.reveal .photos.fragment img {
+  opacity: 0; transform: translateY(14px);
+  transition: opacity .45s ease, transform .45s ease;
+}
+.reveal .photos.fragment.visible img { opacity: 1; transform: none; }
+.reveal .photos.fragment.visible > :nth-child(2) img { transition-delay: .35s; }
+.reveal .photos.fragment.visible > :nth-child(3) img { transition-delay: .7s; }
+.reveal .photos.fragment.visible > :nth-child(4) img { transition-delay: 1.05s; }
+
+// Closing line that fades in and rises on a key press, matching the photos: ::: {.closer .fragment .custom}
+.reveal .slides section .closer.fragment {
+  opacity: 0; visibility: inherit; transform: translateY(14px);
+  transition: opacity .45s ease, transform .45s ease;
+}
+.reveal .slides section .closer.fragment.visible { opacity: 1; transform: none; }
